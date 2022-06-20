@@ -39,20 +39,28 @@ def save_phonelist(aConnection):
         
     cursorDB.close()
     
-print("""Welcome to the phone list, the following commands/instructions are available:
-    LIST, ADD, DELETE, QUIT!""")
+print("""
+  Hallo and welcome to the phone list, the available commands/instructions are:
+  ADD, DELETE, LIST, QUIT
+  --------------------------
+    ADD    [A] - Add a phone number
+    DELETE [D] - Delete a contact
+    LIST   [L] - List all phone numbers
+    QUIT   [Q] - Quit the program
+  --------------------------
+  """)
 
 while True: ## REPL - Read Execute Program Loop
     commandInstruction = input("Command/Instruction: ")
-    if commandInstruction == "LIST":
+    if commandInstruction == "LIST" or commandInstruction == "L":
         print(read_phonelist(connectToDB))
-    elif commandInstruction == "ADD":
+    elif commandInstruction == "ADD" or commandInstruction == "A":
         name = input("  Name: ")
         phone = input("  Phone: ")
         add_phone(connectToDB, name, phone)
-    elif commandInstruction == "DELETE":
+    elif commandInstruction == "DELETE" or commandInstruction == "D":
         name = input("  Name: ")
         delete_phone(connectToDB, name)
-    elif commandInstruction == "QUIT":
+    elif commandInstruction == "QUIT" or commandInstruction == "Q":
         save_phonelist(connectToDB)
         exit()
