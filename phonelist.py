@@ -39,16 +39,23 @@ def save_phonelist(aConnection):
         
     cursorDB.close()
     
-print("""
-  Hallo and welcome to the phone list, the available commands/instructions are:
-  ADD, DELETE, LIST, QUIT
-  --------------------------
-    ADD    [A] - Add a phone number
-    DELETE [D] - Delete a contact
-    LIST   [L] - List all phone numbers
-    QUIT   [Q] - Quit the program
-  --------------------------
-  """)
+def infoMessage():
+    print("""
+    Hallo and welcome to the phone list,
+    the available commands/instructions are:
+    ADD, DELETE, LIST, QUIT
+    --------------------------
+      ADD    [A] - Add a phone number
+      DELETE [D] - Delete a contact
+      LIST   [L] - List all phone numbers
+      QUIT   [Q] - Quit the program
+      SAVE   [S] - Save/store the changes into the database
+      
+      HELP   [H] - Shows all the valid Commands/Instructions 
+    --------------------------
+    """)
+    
+infoMessage()
 
 while True: ## REPL - Read Execute Program Loop
     commandInstruction = input("Command/Instruction: ").upper()
@@ -61,9 +68,18 @@ while True: ## REPL - Read Execute Program Loop
     elif commandInstruction == "DELETE" or commandInstruction == "D":
         name = input("  Name: ")
         delete_phone(connectToDB, name)
-    elif commandInstruction == "QUIT" or commandInstruction == "Q":
+    elif commandInstruction == "SAVE" or commandInstruction == "S":
         save_phonelist(connectToDB)
-        exit()
+    elif commandInstruction == "QUIT" or commandInstruction == "Q":
+        #while True:
+        commandInstruction = input("SAVE befor quiting [Yes or No]: ").upper()
+        if commandInstruction == "YES" or commandInstruction == "Y": 
+            save_phonelist(connectToDB)
+            exit()
+        else:
+            exit()
+    elif commandInstruction == "HELP" or commandInstruction == "H":
+        infoMessage()
     else:
         print(commandInstruction + """ is not a valid Command/instruction.
           Valid Commands/Instructions are ADD, DELETE, LIST, QUIT""")
