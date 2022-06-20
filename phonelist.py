@@ -64,3 +64,6 @@ while True: ## REPL - Read Execute Program Loop
     elif commandInstruction == "QUIT" or commandInstruction == "Q":
         save_phonelist(connectToDB)
         exit()
+    else:
+        print(commandInstruction + """ is not a valid Command/instruction.
+          Valid Commands/Instructions are ADD, DELETE, LIST, QUIT""")
