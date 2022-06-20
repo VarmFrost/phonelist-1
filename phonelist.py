@@ -51,7 +51,7 @@ print("""
   """)
 
 while True: ## REPL - Read Execute Program Loop
-    commandInstruction = input("Command/Instruction: ")
+    commandInstruction = input("Command/Instruction: ").upper()
     if commandInstruction == "LIST" or commandInstruction == "L":
         print(read_phonelist(connectToDB))
     elif commandInstruction == "ADD" or commandInstruction == "A":
