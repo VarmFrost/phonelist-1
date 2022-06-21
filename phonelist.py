@@ -22,10 +22,10 @@ def add_phone(aConnection, aName, aPhone, aAddress):
     #print("{} added!".format(aName))
     cursorDB.close()
     
-def delete_phone(aConnection, aName):
+def delete_phone(aConnection, aName, aId):
     cursorDB = aConnection.cursor()
-    cursorDB.execute(f"DELETE FROM phonelist WHERE name = '{aName}';")
-    print(str(aName) + " deleted!")
+    cursorDB.execute(f"DELETE FROM phonelist WHERE name = '{aName}' AND id = '{aId}';")
+    print(aName + " deleted!")
     #print("{} deleted!".format(aName))
     cursorDB.close()
     
@@ -64,11 +64,12 @@ while True: ## REPL - Read Execute Program Loop
     elif commandInstruction == "ADD" or commandInstruction == "A":
         name = input("  Name: ")
         phone = input("  Phone: ")
-        address = input(" Address: ")
+        address = input("  Address: ")
         add_phone(connectToDB, name, phone, address)
     elif commandInstruction == "DELETE" or commandInstruction == "D":
         name = input("  Name: ")
-        delete_phone(connectToDB, name)
+        idForContact = input("  ID: ")  
+        delete_phone(connectToDB, name, idForContact)
     elif commandInstruction == "SAVE" or commandInstruction == "S":
         save_phonelist(connectToDB)
     elif commandInstruction == "QUIT" or commandInstruction == "Q":
