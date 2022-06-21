@@ -15,10 +15,10 @@ def read_phonelist(aConnection):
     cursorDB.close()
     return rows
 
-def add_phone(aConnection, aName, aPhone):
+def add_phone(aConnection, aName, aPhone, aAddress):
     cursorDB = aConnection.cursor()
-    cursorDB.execute(f"INSERT INTO phonelist VALUES ('{aName}', '{aPhone}');")
-    print(str(aName) + " added!")
+    cursorDB.execute(f"INSERT INTO phonelist VALUES ('{aName}', '{aPhone}', '{aAddress}');")
+    print(aName + " added!")
     #print("{} added!".format(aName))
     cursorDB.close()
     
@@ -64,7 +64,8 @@ while True: ## REPL - Read Execute Program Loop
     elif commandInstruction == "ADD" or commandInstruction == "A":
         name = input("  Name: ")
         phone = input("  Phone: ")
-        add_phone(connectToDB, name, phone)
+        address = input(" Address: ")
+        add_phone(connectToDB, name, phone, address)
     elif commandInstruction == "DELETE" or commandInstruction == "D":
         name = input("  Name: ")
         delete_phone(connectToDB, name)
